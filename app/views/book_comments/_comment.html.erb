@@ -1,0 +1,26 @@
+<table>
+  <tbody>
+      <% book.book_comments.each do |message| %>
+      <tr>
+        
+        <td>
+          <%= link_to user_path(message.user) do %>
+            <%= image_tag message.user.get_profile_image(100,100) %><br>
+            <%= message.user.name %>
+          <% end %>
+        </td>
+        <td><%= message.comment %></td>
+        <td>
+          <% if message.user == current_user %>
+            <%= link_to "Destroy", book_book_comment_path(book, message), method: :delete, class: "btn btn-danger pull-right" %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<%= form_with(model:[book, book_comment],remote: true) do |f| %>
+  <%= f.text_area :comment, rows:'10', class: "w-100" %>
+  <%= f.submit "送信", class: "btn btn-secondary" %>
+<% end %>

@@ -24,7 +24,7 @@ before_action :ensure_current_user,{only:[:edit,:update]}
   end
 
   def index
-    @books=Book.all
+    @books =Book.all
     @book = Book.new
     @user = current_user
   end
@@ -33,6 +33,7 @@ before_action :ensure_current_user,{only:[:edit,:update]}
     @book = Book.find(params[:id])
     @user = @book.user
     @book_new = Book.new
+    @book_comment = BookComment.new
   end
 
   def edit
